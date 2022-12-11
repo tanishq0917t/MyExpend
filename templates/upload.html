@@ -1,0 +1,40 @@
+
+<html>
+   <head>
+      <title>MyExpend</title>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script>
+         function done()
+         {
+            var dd={
+               "user":document.getElementById('us').value,
+               "amount":document.getElementById('am').value
+            };
+            $.ajax({
+               url:'start',
+               type:'POST',
+               data:dd,
+               success:function(response){
+                  if(response!=0){
+                     alert('Done, Thank You');
+                     document.getElementById('us').value="";
+                     document.getElementById('am').value="";
+                     window.location = '/';
+                  }
+                  else{
+                     alert('Something Wrong');
+                  }
+               }
+            });
+         }
+      </script>
+   </head>
+   <body>
+      <center>
+      <h1>Hi Enter your Expend</h1>
+      User Name: <input type="text" id='us' name='us'><br><br>
+      Amount: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="number" id='am' name='am'><br><br>
+      <button type='button' onclick="done()">Submit</button>
+      </center>
+   </body>
+</html>
