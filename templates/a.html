@@ -1,0 +1,71 @@
+<html>
+    <head>
+       <title>My Expend</title>
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+       <style>
+            table, th {
+               border: 1px solid;
+            }
+            td {
+               text-align: center;
+               border: 1px solid;
+               padding: 4pt;
+            }
+       </style>
+       <script>
+         function back(){
+            window.location = '/';
+         }
+            function doo(){
+                $($.ajax({
+               "url":"give",
+               "data":{
+                  "user":document.getElementById("us").value,
+                  "pass":document.getElementById("ps").value
+               },
+               "type":"POST",
+               "success":function(response){
+                  if(response!=0)
+                  {
+                     response=response.split(',');
+                     document.getElementById("tble").style.visibility="initial";
+                     var tt="";
+                     var x=1;
+                     for(var i=0;i<response.length;i+=3)
+                     {
+                        tt+="<tr><td>"+x+"</td><td>"+response[i]+"</td>"+"<td>"+response[i+1]+"</td>"+"<td>"+response[i+2]+"</td></tr>";
+                        x++;
+                     }
+                     $("#tble").append(tt);
+                     document.getElementById("bb").style.visibility="initial";
+                  }
+                  else{
+                     alert("Wrong Credentials");
+                     document.getElementById('us').value="";
+                     document.getElementById('ps').value="";
+                  }
+               }
+            }));
+            }
+       </script>
+    </head>
+    <body>
+       <center>
+        <h1>Welcome to MyExpend</h1>
+        <form>
+            User: <input type="text" id="us" name="us"><br><br>
+            Pass: <input type="password" id="ps" name="ps"><br><br>
+            <button type="button" onclick="doo()">View</button>
+        </form>
+        <table id="tble" class="" style="visibility:hidden">
+         <tr>
+            <th>S.No</th>
+            <th>Date</th>
+            <th>Note</th>
+            <th>Amount</th>
+         </tr>
+        </table><br>
+        <button type="button" id="bb" onclick="back()" style="visibility: hidden;">Ok</button>
+       </center>
+    </body>
+ </html>
