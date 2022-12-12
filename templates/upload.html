@@ -8,7 +8,9 @@
          {
             var dd={
                "user":document.getElementById('us').value,
-               "amount":document.getElementById('am').value
+               "pass":document.getElementById('ps').value,
+               "amount":document.getElementById('am').value,
+               "note":document.getElementById('nt').value
             };
             $.ajax({
                url:'start',
@@ -18,7 +20,9 @@
                   if(response!=0){
                      alert('Done, Thank You');
                      document.getElementById('us').value="";
+                     document.getElementById('ps').value="";
                      document.getElementById('am').value="";
+                     document.getElementById('nt').value="";
                      window.location = '/';
                   }
                   else{
@@ -33,7 +37,9 @@
       <center>
       <h1>Hi Enter your Expend</h1>
       User Name: <input type="text" id='us' name='us'><br><br>
+      Password: &nbsp;&nbsp;&nbsp;<input type="password" id='ps' name='ps'><br><br>
       Amount: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="number" id='am' name='am'><br><br>
+      Note: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id='nt' name='nt'><br><br>
       <button type='button' onclick="done()">Submit</button>
       </center>
    </body>
