@@ -1,15 +1,21 @@
 <html>
     <head>
        <title>My Expend</title>
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+       <script>
+         function add(){
+            window.location = 'add';
+         }
+         function view(){
+            window.location = 'view';
+         }
+       </script>
     </head>
     <body>
        <center>
         <h1>Welcome to MyExpend</h1>
-        <form action="/authenticate" method="POST">
-            User: <input type="text" id="us" name="us"><br><br>
-            Pass: <input type="text" id="ps" name="ps"><br><br>
-            <input type="submit">
-        </form>
+        <button type="button" onclick="add()">Add Transaction</button><br><br>
+        <button type="button" onclick="view()">View Transactions</button><br><br>
        </center>
     </body>
  </html>
