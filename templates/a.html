@@ -13,10 +13,12 @@
             }
        </style>
        <script>
+         var hasViewed=false;
          function back(){
             window.location = '/';
          }
             function doo(){
+               if(hasViewed==false){
                 $($.ajax({
                "url":"give",
                "data":{
@@ -25,6 +27,7 @@
                },
                "type":"POST",
                "success":function(response){
+                  hasViewed=true;
                   if(response!=0)
                   {
                      response=response.split(',');
@@ -47,6 +50,7 @@
                }
             }));
             }
+         }
        </script>
     </head>
     <body>
@@ -55,7 +59,7 @@
         <form>
             User: <input type="text" id="us" name="us"><br><br>
             Pass: <input type="password" id="ps" name="ps"><br><br>
-            <button type="button" onclick="doo()">View</button>
+            <button type="button" onclick="doo()">View</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" onclick="back()">Home</button>
         </form>
         <table id="tble" class="" style="visibility:hidden">
          <tr>
