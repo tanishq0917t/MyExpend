@@ -20,8 +20,8 @@ def setUp():
         a=request.form
 
         fname=""
-        if a['user'].upper()=="TANISHQ" and a['pass']=="Tanishq@1710h": fname="tanishq.txt"
-        elif a['user'].upper()=="HONEY" and a['pass']=="Tanishq@1710h": fname="honey.txt"
+        if a['user'].upper()=="***********" and a['pass']=="***********": fname="***********"
+        elif a['user'].upper()=="***********" and a['pass']=="***********": fname="***********"
         else: return "0"
         with open(fname,"a+") as file:
             d=str(datetime.datetime.now().day)+"-"+str(datetime.datetime.now().month)+"-"+str(datetime.datetime.now().year)
@@ -38,8 +38,8 @@ def set():
     if request.method=="POST":
         a=request.form
         fname=""
-        if a['user'].upper()=="TANISHQ" and a['pass']=="Tanishq@1710h": fname="tanishq.txt"
-        elif a['user'].upper()=="HONEY" and a['pass']=="Tanishq@1710h": fname="honey.txt"
+        if a['user'].upper()=="***********" and a['pass']=="***********": fname="***********"
+        elif a['user'].upper()=="***********" and a['pass']=="***********": fname="***********"
         else: return "0"
         a=open(fname,"r").read().strip()
         a=a.split("\n")
