@@ -2,6 +2,7 @@
     <head>
        <title>My Expend</title>
        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
        <style>
             table, th {
                border: 1px solid;
@@ -41,6 +42,7 @@
                      }
                      $("#tble").append(tt);
                      document.getElementById("bb").style.visibility="initial";
+                     document.getElementById("pdf").style.visibility="initial";
                   }
                   else{
                      alert("Wrong Credentials");
@@ -51,22 +53,32 @@
             }));
             }
          }
+         function getFile()
+         {
+            $.ajax({
+               "url":'download',
+               "type":'POST'
+            });
+         }
        </script>
     </head>
     <body>
        <center>
         <h1>Welcome to MyExpend</h1>
-        <form>
+        <form action="download" method="post">
             User: <input type="text" id="us" name="us"><br><br>
             Pass: <input type="password" id="ps" name="ps"><br><br>
-            <button type="button" onclick="doo()">View</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" onclick="back()">Home</button>
-        </form>
+            <button type="button" onclick="doo()">View</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" onclick="back()">Home</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            
+               <button type="submit" id="pdf" style="visibility: hidden;">PDF</button>
+            </form>
+        
         <table id="tble" class="" style="visibility:hidden">
          <tr>
             <th>S.No</th>
             <th>Date</th>
             <th>Amount</th>
-             <th>Note</th>
+            <th>Note</th>
          </tr>
         </table><br>
         <button type="button" id="bb" onclick="back()" style="visibility: hidden;">Ok</button>
