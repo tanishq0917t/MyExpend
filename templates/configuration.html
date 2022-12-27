@@ -1,0 +1,49 @@
+
+<html>
+    <head>
+       <title>MyExpend</title>
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <script>
+          function goHome()
+          {
+             window.location="/";
+          }
+          function done()
+          {
+             var dd={
+                "user":document.getElementById('us').value,
+                "pass":document.getElementById('ps').value,
+                "newPass":document.getElementById('nps').value,
+             };
+             $.ajax({
+                url:'change',
+                type:'POST',
+                data:dd,
+                success:function(response){
+                   if(response!=0){
+                      alert('Done, Thank You');
+                      document.getElementById('us').value="";
+                      document.getElementById('ps').value="";
+                      document.getElementById('nps').value="";
+                      window.location = '/';
+                   }
+                   else{
+                      alert('Invalid Credentials');
+                   }
+                }
+             });
+          }
+       </script>
+    </head>
+    <body>
+       <center>
+       <h1>Hi Configure your Account</h1>
+       User Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id='us' name='us'><br><br>
+       Password: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" id='ps' name='ps'><br><br>
+       New Password: &nbsp;&nbsp;&nbsp;<input type="password" id='nps' name='nps'><br><br>
+       <button type='button' onclick="done()">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" onclick="goHome()">Home</button>
+       </center>
+    </body>
+ </html>
+ 
