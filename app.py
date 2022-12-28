@@ -2,6 +2,8 @@ from flask import *
 import datetime
 from fpdf import FPDF
 
+# Populating DS starts here
+
 credentials=dict()
 
 def loadData():
@@ -13,7 +15,13 @@ def loadData():
 
 loadData()
 
+# Populating DS ends here
+
+
 app = Flask(__name__)
+
+
+# Public URL Mapping Starts here
 
 @app.route('/')
 def index():
@@ -31,9 +39,12 @@ def vv():
 def cnf():
     return render_template("configuration.html")
 
+# Public URL Mapping Ends here
+#-----------------------------------------------------------------------------------
 
+# Private URL Mapping Starts here
 
-@app.route('/change',methods=['POST','GET'])
+@app.route('/change',methods=['POST','GET'])    #Function to change password
 def change():
     if request.method=="POST":
         oldPass=request.form['pass']
@@ -52,7 +63,7 @@ def change():
         applyChanges()
         return "1"
 
-def applyChanges():
+def applyChanges():     #Utility function for changing password
     newData=[]
     for i in credentials:
         newData.append({"user":i,"pass":credentials[i][0],"file":credentials[i][1]})
@@ -63,7 +74,7 @@ def applyChanges():
         json.dump(newData, f, indent=2)
 
 
-@app.route('/start',methods=['POST','GET'])
+@app.route('/start',methods=['POST','GET'])     #Function to add details
 def setUp():
     if request.method=="POST":
         inpUser=request.form['user']
@@ -85,7 +96,7 @@ def setUp():
             file.write("\n")
         return "1"
 
-@app.route('/give',methods=['POST','GET'])
+@app.route('/give',methods=['POST','GET'])      #Function to view transactions
 def set():
     if request.method=="POST":
         inpUser=request.form['user']
@@ -107,7 +118,7 @@ def set():
             aa="None"
         return aa
 
-@app.route('/download',methods=['POST','GET'])
+@app.route('/download',methods=['POST','GET'])      #Function to create PDF
 def requestPDF():
     inpUser=request.form['us']
     inpPass=request.form['ps']
