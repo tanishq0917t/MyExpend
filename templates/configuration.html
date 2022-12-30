@@ -1,49 +1,211 @@
-
 <html>
-    <head>
-       <title>MyExpend</title>
-       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <script>
-          function goHome()
-          {
-             window.location="/";
-          }
-          function done()
-          {
-             var dd={
-                "user":document.getElementById('us').value,
-                "pass":document.getElementById('ps').value,
-                "newPass":document.getElementById('nps').value,
-             };
-             $.ajax({
-                url:'change',
-                type:'POST',
-                data:dd,
-                success:function(response){
-                   if(response!=0){
-                      alert('Done, Thank You');
-                      document.getElementById('us').value="";
-                      document.getElementById('ps').value="";
-                      document.getElementById('nps').value="";
-                      window.location = '/';
-                   }
-                   else{
-                      alert('Invalid Credentials');
-                   }
-                }
-             });
-          }
-       </script>
-    </head>
-    <body>
-       <center>
-       <h1>Hi Configure your Account</h1>
-       User Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id='us' name='us'><br><br>
-       Password: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" id='ps' name='ps'><br><br>
-       New Password: &nbsp;&nbsp;&nbsp;<input type="password" id='nps' name='nps'><br><br>
-       <button type='button' onclick="done()">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" onclick="goHome()">Home</button>
-       </center>
-    </body>
- </html>
- 
+
+<head>
+   <title>MyExpend</title>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+   <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+      * {
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box;
+         font-family: 'Poppins', sans-serif;
+      }
+
+      body {
+         background: #1abc9c;
+         overflow: hidden;
+      }
+
+      ::selection {
+         background: rgba(26, 188, 156, 0.3);
+      }
+
+      .container {
+         max-width: 440px;
+         padding: 0 20px;
+         margin: 70px auto;
+      }
+
+      .wrapper {
+         width: 100%;
+         background: #fff;
+         border-radius: 5px;
+         box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.1);
+      }
+
+      .wrapper .title {
+         height: 90px;
+         background: #16a085;
+         border-radius: 5px 5px 0 0;
+         color: #fff;
+         font-size: 30px;
+         font-weight: 600;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+      }
+
+      .wrapper form {
+         padding: 30px 25px 25px 25px;
+      }
+
+      .wrapper form .row {
+         height: 45px;
+         margin-bottom: 15px;
+         position: relative;
+      }
+
+      .wrapper form .row input {
+         height: 100%;
+         width: 100%;
+         outline: none;
+         padding-left: 60px;
+         border-radius: 5px;
+         border: 1px solid lightgrey;
+         font-size: 16px;
+         transition: all 0.3s ease;
+      }
+
+      form .row input:focus {
+         border-color: #16a085;
+         box-shadow: inset 0px 0px 2px 2px rgba(26, 188, 156, 0.25);
+      }
+
+      form .row input::placeholder {
+         color: #999;
+      }
+
+      .wrapper form .row i {
+         position: absolute;
+         width: 47px;
+         height: 100%;
+         color: #fff;
+         font-size: 18px;
+         background: #16a085;
+         border: 1px solid #16a085;
+         border-radius: 5px 0 0 5px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+      }
+
+      .wrapper form .pass {
+         margin: -8px 0 20px 0;
+      }
+
+      .wrapper form .pass a {
+         color: #16a085;
+         font-size: 17px;
+         text-decoration: none;
+      }
+
+      .wrapper form .pass a:hover {
+         text-decoration: underline;
+      }
+
+      .wrapper form .button input {
+         color: #fff;
+         font-size: 20px;
+         font-weight: 500;
+         padding-left: 0px;
+         background: #16a085;
+         border: 1px solid #16a085;
+         cursor: pointer;
+      }
+
+      form .button input:hover {
+         background: #12876f;
+      }
+
+      .wrapper form .signup-link {
+         text-align: center;
+         margin-top: 20px;
+         font-size: 17px;
+      }
+
+      .wrapper form .signup-link a {
+         color: #16a085;
+         text-decoration: none;
+      }
+
+      form .signup-link a:hover {
+         text-decoration: underline;
+      }
+   </style>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+
+
+
+
+
+   <script>
+      function goHome() {
+         window.location = "/";
+      }
+      function done() {
+         var dd = {
+            "user": document.getElementById('us').value,
+            "pass": document.getElementById('ps').value,
+            "newPass": document.getElementById('nps').value,
+         };
+         $.ajax({
+            url: 'change',
+            type: 'POST',
+            data: dd,
+            success: function (response) {
+               if (response != 0) {
+                  alert('Done, Thank You');
+                  document.getElementById('us').value = "";
+                  document.getElementById('ps').value = "";
+                  document.getElementById('nps').value = "";
+                  window.location = '/';
+               }
+               else {
+                  alert('Invalid Credentials');
+                  document.getElementById('ps').value = "";
+                  document.getElementById('nps').value = "";
+               }
+            }
+         });
+      }
+   </script>
+</head>
+
+<body>
+   <div class="container">
+      <div class="wrapper">
+         <center>
+            <div class="title"><span>MyExpend <br> Configure Account</span></div>
+         </center>
+         <form action="#">
+
+            <div class="row">
+               <i class="fas fa-user"></i>
+               <input type="text" placeholder="Username" id="us" required>
+            </div>
+            <div class="row">
+               <i class="fas fa-lock"></i>
+               <input type="password" placeholder="Old Password" id="ps" required>
+            </div>
+            <div class="row">
+               <i class="fas fa-lock"></i>
+               <input type="password" placeholder="New Password" id="nps" required>
+            </div>
+            <div class="row button"> <input type="button" onclick="done()" value="Change"> </div>
+            <div class="row button"> <input type="button" onclick="back()" value="Home"> </div>
+
+         </form>
+         <center>&copy;Tanishq Rawat</center><br>
+         <center><a href="https://tanishq1710h.github.io/" target="_blank">Portfolio</a></center><br>
+      </div>
+   </div>
+</body>
+
+</html>
